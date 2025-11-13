@@ -13,26 +13,58 @@ namespace Apiwmovies.Repository
             _context = context;
         }
 
-        public Task<bool> CategoryExistsByIdAsync(int id)
+        public async Task<bool> CategoryExistsByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Categories
+                  .AsNoTracking()
+                  .AnyAsync(c => c.Id == id);
+        }
+        public async Task<bool> CategoryExistsByNameAsync(string name)
+        {
+            return await _context.Categories
+                  .AsNoTracking()
+                  .AnyAsync(c => c.name == name);
+        }
+        public async Task<bool> CreateCategoryAsync(Category category)
+        {
+            category.CreatedDate = DateTime.UtcNow;
+
+            var addedCategory = await _context.Categories.AddAsync(category);
+
+            return await SaveAsync();
 
         }
-        public Task<bool> CategoryExistsByNameAsync(string name)
+        public async Task<bool> UpdateCategoryAsync(Category category)
         {
-            throw new NotImplementedException();
+            category.ModifiedDate = DateTime.UtcNow;
+
+            _context.Categories.Update(category);
+
+            return await SaveAsync();
+
         }
-        public Task<bool> CreateCategoryAsync(Category category)
+
+        private async Task<bool> SaveAsync()
         {
-            throw new NotImplementedException();
+            return await _context.SaveChangesAsync() >= 0 ? true : false;
         }
-        public Task<bool> UpdateCategoryAsync(Category category)
+
+        public async Task<bool> DeleteCategoryAsync(int id)
         {
-            throw new NotImplementedException();
-        }
-        public Task<bool> DeleteCategoryAsync(int id)
-        {
-            throw new NotImplementedException();
+            var category = await GetCategoryAsync(id); //primero consulto que si exista la categoria.
+
+
+
+
+            if (category == null)
+            {
+                return false; // la categoría no existe
+            }
+
+            _context.Categories.Remove(category);
+
+            return await SaveAsync();
+
         }
         public async Task<Category> GetCategoryAsync(int id)
         {
@@ -42,11 +74,25 @@ namespace Apiwmovies.Repository
 
         }
 
-        public Task<ICollection<Category>> GetCategoriesAsync()
+        public async Task<ICollection<Category>> GetCategoriesAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Categories
+               .AsNoTracking()
+               .OrderBy(c => c.Name)
+               .ToListAsync();
         }
     }
 
 }
 
+/* Lista de categorias:
+ 
+ *1-accion.
+ *2-comedia
+ *3-drama
+ *4-ciencia ficcion
+ *5-terror
+ *6-romance
+ *7-aventura
+ *8-infantil
+ 
