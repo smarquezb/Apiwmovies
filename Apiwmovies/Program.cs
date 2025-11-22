@@ -1,6 +1,5 @@
 using Apiwmovies.DAL;
 using Apiwmovies.MoviesMapper;
-using Apiwmovies.Repository;
 using Apiwmovies.Services;
 using Apiwmovies.Services.IServices;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +16,7 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 // Dependency Injection for Repositories
 
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryR, CategoryService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

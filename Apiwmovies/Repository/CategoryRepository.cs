@@ -76,10 +76,13 @@ namespace Apiwmovies.Repository
 
         public async Task<ICollection<Category>> GetCategoriesAsync()
         {
-            return await _context.Categories
-               .AsNoTracking()
-               .OrderBy(c => c.Name)
-               .ToListAsync();
+            var categories = await _categoryRepository.GetCategoriesAsync();
+
+            // Solo estoy llamando el método desde la capa de Repository
+
+            return _mapper.Map<ICollection<CategoryDto>>(categories);
+
+            // Mapeo la lista de categorías a una lista de categorías DTO
         }
     }
 
