@@ -1,15 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace API.W.Movies.DAL.Models
+namespace API.P.Movies.DAL.Models
 {
     public class AuditBase
     {
-        [Key] //Este data annotation indica que el campo es la clave primaria
+        [Key] //Decorator
+        // Este data annotation indica que esta propiedad es la clave primaria
+        // The virtual is like a inherits (herencia) 
         public virtual int Id { get; set; }
 
         public virtual DateTime CreatedDate { get; set; }
 
-        public virtual DateTime? ModifiedDate { get; set; }
+        public virtual DateTime? ModifiedDate { get; set; }  // ? indica que esta propiedad es nullable (acepta null)
     }
 }
 

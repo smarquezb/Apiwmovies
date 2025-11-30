@@ -4,6 +4,7 @@ using API.P.Movies.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.P.Movies.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("2025111205451_InitialDB")]
+    partial class InitialDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,7 +36,7 @@ namespace API.P.Movies.Migrations
                 b.Property<DateTime>("CreatedDate")
                     .HasColumnType("datetime2");
 
-                b.Property<DateTime?>("ModifiedDate")
+                b.Property<DateTime>("ModifiedDate")
                     .HasColumnType("datetime2");
 
                 b.Property<string>("Name")
@@ -43,39 +46,6 @@ namespace API.P.Movies.Migrations
                 b.HasKey("Id");
 
                 b.ToTable("Categories");
-            });
-
-            modelBuilder.Entity("API.P.Movies.DAL.Models.Movie", b =>
-            {
-                b.Property<int>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("int");
-
-                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                b.Property<string>("Clasification")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<DateTime>("CreatedDate")
-                    .HasColumnType("datetime2");
-
-                b.Property<string>("Description")
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<int>("Duration")
-                    .HasColumnType("int");
-
-                b.Property<DateTime?>("ModifiedDate")
-                    .HasColumnType("datetime2");
-
-                b.Property<string>("Name")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-
-                b.HasKey("Id");
-
-                b.ToTable("Movies");
             });
 #pragma warning restore 612, 618
         }
