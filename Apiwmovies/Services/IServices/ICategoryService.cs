@@ -1,18 +1,18 @@
-﻿using API.W.Movies.DAL.Models;
-using API.W.Movies.DAL.Models.Dtos;
-using Apiwmovies.DAL.Models.Dtos;
+﻿using API.P.Movies.DAL.Models;
+using API.P.Movies.DAL.Models.Dtos;
 
-namespace API.W.Movies.Services.IServices
+namespace API.P.Movies.Services.IServices
 {
     public interface ICategoryService
     {
+        //tendra los mismos metodos o firmas que ICategoryRepository
         Task<ICollection<CategoryDto>> GetCategoriesAsync();
         Task<CategoryDto> GetCategoryAsync(int id);
-        Task<CategoryDto> CreateCategoryAsync(CategoryCreateUpdateDto categoryDto);
-        Task<CategoryDto> UpdateCategoryAsync(CategoryCreateUpdateDto dto, int id);
-        Task<bool> DeleteCategoryAsync(int id);
         Task<bool> CategoryExistsByIdAsync(int id);
         Task<bool> CategoryExistsByNameAsync(string name);
+        Task<CategoryDto> CreateCategoryAsync(CategoryCreateUpdateDto categoryCreateDto);
+        Task<CategoryDto> UpdateCategoryAsync(CategoryCreateUpdateDto dto, int id);
+        Task<bool> DeleteCategoryAsync(int id);
     }
-
 }
+
