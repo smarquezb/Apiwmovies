@@ -1,16 +1,18 @@
-﻿using API.W.Movies.DAL.Models;
-using API.W.Movies.DAL.Models.Dtos;
-using Apiwmovies.DAL.Models.Dtos;
+﻿using API.P.Movies.DAL.Models;
+using API.P.Movies.DAL.Models.Dtos;
 using AutoMapper;
 
-namespace API.W.Movies.MoviesMapper
+namespace API.P.Movies.MoviesMapper
 {
     public class Mappers : Profile
     {
         public Mappers()
         {
-            CreateMap<Category, CategoryDto>().ReverseMap();
+            CreateMap<Category, CategoryDto>().ReverseMap(); // ReverseMap para mapear en ambos sentidos
             CreateMap<Category, CategoryCreateUpdateDto>().ReverseMap();
+
+            CreateMap<Movie, MovieDto>().ReverseMap();
+            CreateMap<Movie, MovieCreateUpdateDto>().ReverseMap();
         }
     }
 }

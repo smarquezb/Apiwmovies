@@ -1,15 +1,17 @@
-﻿using API.W.Movies.DAL.Models;
+﻿using API.P.Movies.DAL.Models;
 
-namespace API.W.Movies.Repository.IRepository
+namespace API.P.Movies.Repository.IRepository
 {
     public interface ICategoryRepository
     {
-        Task<ICollection<Category>> GetCategoriesAsync(); //Me retorna UNA LISTA DE CATEGORIAS
-        Task<Category> GetCategoryAsync(int id); //Me retorna UNA CATEGORIA POR ID
-        Task<bool> CategoryExistsByIdAsync(int id); //Me dice si existe una categoria por ID
-        Task<bool> CategoryExistsByNameAsync(string name); //Me dice si existe una categoria por Nombre
+        Task<ICollection<Category>> GetCategoriesAsync(); //Me retorna una lista de categorias
+        Task<Category> GetCategoryAsync(int id); //Me retorna una categoria por su Id
+        Task<bool> CategoryExistsByIdAsync(int id); //Me dice si una categoria existe por su Id
+        Task<bool> CategoryExistsByNameAsync(string name); //Me dice si una categoria existe por su nombre
         Task<bool> CreateCategoryAsync(Category category); //Me crea una categoria
-        Task<bool> UpdateCategoryAsync(Category category); //Me crea una categoria --puedo actualizar el nombre y la fecha de actualizacion
+        Task<bool> UpdateCategoryAsync(Category category); //Me actualiza una categoria, puedo actualizar el nombre y la fecha de actualizacion
         Task<bool> DeleteCategoryAsync(int id); //Me elimina una categoria
+        // Estas son las 7 firmas de los metodos
     }
 }
+
